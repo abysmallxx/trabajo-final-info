@@ -25,11 +25,19 @@ class Procesamiento:
             # Leer los datos del archivo CSV
             df = pd.read_csv(archivo_csv)
 
-            # Verificar que tenga las columnas necesarias (por ejemplo: 'Tiempo' y 'Señal')
+            # Verificar que tenga las columnas necesarias
             if 'Tiempo' in df.columns and 'Señal' in df.columns:
                 tiempo = df['Tiempo'].values
                 senal = df['Señal'].values
-                return tiempo, senal, "Archivo CSV cargado con éxito"
+
+                # Analizar la señal para determinar el estado
+                amplitud_promedio = np.mean(np.abs(senal))
+                if amplitud_promedio > 50:  # Umbral ajustable según tus datos
+                    estado = "Microsueño Detectado"
+                else:
+                    estado = "Estado Normal"
+
+                return tiempo, senal, estado
             else:
                 return None, None, "El archivo CSV no tiene las columnas necesarias"
 

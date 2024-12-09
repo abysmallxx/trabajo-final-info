@@ -46,18 +46,17 @@ class Interfaz:
         self.guardar_senal(tiempo, senal, estado)
 
     def cargar_csv(self):
-        # Abrir un cuadro de diálogo para seleccionar el archivo CSV
         archivo = filedialog.askopenfilename(filetypes=[("CSV Files", "*.csv")])
         if archivo:
-            tiempo, senal, mensaje = self.procesador.cargar_datos_csv(archivo)
+            tiempo, senal, estado = self.procesador.cargar_datos_csv(archivo)
             if tiempo is not None:
-                self.estado_label.config(text="Archivo CSV cargado exitosamente")
+                self.estado_label.config(text=f"Estado del Conductor: {estado}")
                 self.mostrar_grafico(tiempo, senal)
-                # Guardar la señal del CSV en la lista
-                self.guardar_senal(tiempo, senal, mensaje)
+                self.guardar_senal(tiempo, senal, estado)
+                messagebox.showinfo("Estado del Conductor", estado)
             else:
                 self.estado_label.config(text="Error al cargar archivo CSV")
-                messagebox.showerror("Error", mensaje)
+                messagebox.showerror("Error", estado)
 
     def guardar_senal(self, tiempo, senal, estado):
         # Guardar la señal en un archivo CSV o lista
