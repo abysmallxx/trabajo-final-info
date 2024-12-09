@@ -13,10 +13,10 @@ class Procesamiento:
 
         if np.random.rand() > 0.5:
             senal = ruido_microsueño
-            estado = "Microsueño Detectado"
+            estado = "¡Alerta de sueño detectado! /n Recomendaciones: /n1. Detén el vehículo lo antes posible en un lugar seguro. /n2. Toma un descanso de al menos 20-30 minutos. /n3. Si es posible, duerme una siesta breve para recuperar energía. /n4. Evita continuar manejando si sientes fatiga."
         else:
             senal = ruido_normal
-            estado = "Conductor en estado normal"
+            estado = "Conductor en estado normal. Continue su camino."
 
         return tiempo, senal, estado
 
